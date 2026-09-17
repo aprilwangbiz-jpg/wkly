@@ -14,7 +14,7 @@
     --ink-soft: #5a5347;
     --line: #4b463d;
     --shadow: rgba(46,42,36,0.25);
-    --scene-w: min(96vw, 1200px);
+    --scene-w: min(97vw, 1320px);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -42,10 +42,34 @@
   h1.visually-hidden{
     position:absolute; width:1px;height:1px; overflow:hidden; clip:rect(0,0,0,0);
   }
+  .scene-wrap{
+    width: 100%;
+    display:flex;
+    justify-content:center;
+  }
   .scene{
     position: relative;
     width: var(--scene-w);
     aspect-ratio: 1400 / 640;
+    flex-shrink: 0;
+  }
+  .scroll-hint{
+    display:none;
+    text-align:center;
+    color: var(--ink-soft);
+    font-size: .95rem;
+    margin: 0 0 6px;
+  }
+  @media (max-width: 700px){
+    .scene-wrap{
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .scene{ width: 1000px; }
+    .card .label span{ font-size: 0.95rem; }
+    .scroll-hint{ display:block; }
   }
   .scene svg{
     position:absolute; inset:0; width:100%; height:100%; display:block;
@@ -66,8 +90,8 @@
 
   .card{
     position:absolute;
-    width: 10%;
-    aspect-ratio: 5 / 4;
+    width: 11%;
+    aspect-ratio: 5 / 5.6;
     background: var(--card-color, #ffe9a8);
     border-radius: 6px 10px 8px 12px / 10px 8px 12px 6px;
     box-shadow: 0 6px 10px var(--shadow), 0 1px 0 rgba(255,255,255,.4) inset;
@@ -109,7 +133,7 @@
     box-shadow: 0 2px 3px var(--shadow);
   }
   .card svg.pdf-icon{
-    width: 26%;
+    width: 24%;
     height: auto;
     flex-shrink:0;
   }
@@ -119,9 +143,9 @@
     text-align:center;
   }
   .card .label span{
-    font-size: clamp(0.44rem, 1vw, 0.68rem);
-    line-height: 1.28;
-    font-weight: 400;
+    font-size: clamp(0.72rem, 1.55vw, 1.15rem);
+    line-height: 1.32;
+    font-weight: 700;
   }
 
   .caption{
@@ -136,19 +160,21 @@
   }
   .caption strong{
     font-family:'Kalam', cursive;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     letter-spacing: .04em;
   }
   .caption p{
-    margin: 4px 0 0;
+    margin: 6px 0 0;
     color: var(--ink-soft);
-    font-size: .95rem;
+    font-size: 1.15rem;
   }
 </style>
 </head>
 <body>
   <h1 class="visually-hidden">Weekly Reports</h1>
 
+  <p class="scroll-hint">← swipe to see all reports →</p>
+  <div class="scene-wrap">
   <div class="scene" id="scene">
     <svg viewBox="0 0 1400 640" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       <rect x="0" y="0" width="1400" height="640" fill="var(--paper)"/>
@@ -195,6 +221,28 @@
         <line x1="0" y1="615" x2="1400" y2="615"/>
       </g>
 
+      <!-- potted plants -->
+      <g class="sketch">
+        <g>
+          <path fill="#b5602f" d="M60,600 L128,600 L118,638 L70,638 Z"/>
+          <path fill="#8fbf7a" d="M94,600 C74,568 58,550 48,522 C74,532 94,552 100,576 Z"/>
+          <path fill="#8fbf7a" d="M94,600 C106,562 124,540 148,520 C130,542 118,566 108,588 Z"/>
+          <path fill="#8fbf7a" d="M94,600 C90,564 94,538 97,512 C106,538 104,568 102,592 Z"/>
+        </g>
+        <g>
+          <path fill="#b5602f" d="M666,608 L724,608 L715,640 L675,640 Z"/>
+          <path fill="#8fbf7a" d="M695,608 C678,580 664,565 655,542 C678,551 695,568 700,589 Z"/>
+          <path fill="#8fbf7a" d="M695,608 C706,576 722,558 743,540 C727,559 716,580 707,599 Z"/>
+          <path fill="#8fbf7a" d="M695,608 C691,578 695,556 698,534 C706,556 704,582 702,602 Z"/>
+        </g>
+        <g>
+          <path fill="#b5602f" d="M1272,600 L1340,600 L1330,638 L1282,638 Z"/>
+          <path fill="#8fbf7a" d="M1306,600 C1286,568 1270,550 1260,522 C1286,532 1306,552 1312,576 Z"/>
+          <path fill="#8fbf7a" d="M1306,600 C1318,562 1336,540 1360,520 C1342,542 1330,566 1320,588 Z"/>
+          <path fill="#8fbf7a" d="M1306,600 C1302,564 1306,538 1309,512 C1318,538 1316,568 1314,592 Z"/>
+        </g>
+      </g>
+
       <!-- title banner -->
       <g>
         <path class="banner" d="M470,26 h460 l-18,20 l18,20 h-460 l18,-20 Z"/>
@@ -210,6 +258,7 @@
     </svg>
 
     <div class="cards-layer" id="cardsLayer"></div>
+  </div>
   </div>
 
   <div class="caption">
@@ -243,7 +292,7 @@
 
   const SCENE_W = 1400, SCENE_H = 640;
   const LINE_Y0 = 110, SAG = 46;
-  const CARD_W = 148, CARD_H = 172, MARGIN = 30, GAP = 20;
+  const CARD_W = 154, MARGIN = 24, GAP = 10;
   const TILTS = [-2, 1.5, -1, 2.2, -1.6, 1.8, -2.4, 1.2];
 
   function lineYAt(xFrac){
