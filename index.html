@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Reports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #eef1ef;
+    --ink: #2e2a24;
+    --ink-soft: #5a5347;
+    --line: #4b463d;
+    --shadow: rgba(46,42,36,0.25);
+    --scene-w: min(96vw, 1200px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #eef1ef;
+      --ink: #2e2a24;
+    }
+  }
+  *{ box-sizing: border-box; }
+  html,body{
+    margin:0;
+    padding:0;
+    background: #f6f1e6;
+    color: var(--ink);
+    font-family: 'Patrick Hand', cursive, sans-serif;
+    overflow-x: hidden;
+  }
+  body{
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    padding: 24px 16px 40px;
+  }
+  h1.visually-hidden{
+    position:absolute; width:1px;height:1px; overflow:hidden; clip:rect(0,0,0,0);
+  }
+  .scene{
+    position: relative;
+    width: var(--scene-w);
+    aspect-ratio: 1400 / 640;
+  }
+  .scene svg{
+    position:absolute; inset:0; width:100%; height:100%; display:block;
+  }
+  .sketch{ fill:none; stroke: var(--ink-soft); stroke-width:2; stroke-linecap:round; }
+  .sketch-light{ fill:none; stroke: #b9b0a0; stroke-width:1.6; stroke-linecap:round; }
+  .roof-fill{ fill:#e7e1d1; }
+  .ground-fill{ fill:#e2dcc9; }
+  .banner{ fill:#fbf7ec; stroke:var(--ink); stroke-width:2; }
+  .banner-text{
+    font-family:'Kalam', cursive;
+    font-weight:700;
+    fill: var(--ink);
+    text-anchor:middle;
+  }
+
+  .cards-layer{ position:absolute; inset:0; }
+
+  .card{
+    position:absolute;
+    width: 10%;
+    aspect-ratio: 5 / 4;
+    background: var(--card-color, #ffe9a8);
+    border-radius: 6px 10px 8px 12px / 10px 8px 12px 6px;
+    box-shadow: 0 6px 10px var(--shadow), 0 1px 0 rgba(255,255,255,.4) inset;
+    border: 1.5px solid rgba(46,42,36,0.55);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap: 4%;
+    text-decoration:none;
+    color: var(--ink);
+    padding: 6% 5%;
+    overflow: hidden;
+    transform: rotate(var(--tilt, -3deg));
+    transform-origin: top center;
+    transition: transform .18s ease, box-shadow .18s ease;
+    cursor: pointer;
+  }
+  .card:hover, .card:focus-visible{
+    transform: rotate(0deg) translateY(-6%) scale(1.06);
+    box-shadow: 0 12px 18px var(--shadow), 0 1px 0 rgba(255,255,255,.5) inset;
+    z-index: 5;
+    outline: none;
+  }
+  .card:focus-visible{
+    outline: 2.5px dashed var(--ink);
+    outline-offset: 3px;
+  }
+  .pin{
+    position:absolute;
+    top:-7%;
+    left:50%;
+    transform: translateX(-50%);
+    width: 15%;
+    aspect-ratio: 1;
+    border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #ff8a7a, #c73b2c 70%);
+    border: 1px solid #7a2317;
+    box-shadow: 0 2px 3px var(--shadow);
+  }
+  .card svg.pdf-icon{
+    width: 26%;
+    height: auto;
+    flex-shrink:0;
+  }
+  .card .label{
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+  }
+  .card .label span{
+    font-size: clamp(0.44rem, 1vw, 0.68rem);
+    line-height: 1.28;
+    font-weight: 400;
+  }
+
+  .caption{
+    margin-top: 26px;
+    background: #fffdf7;
+    border: 1.5px solid rgba(46,42,36,.5);
+    border-radius: 10px;
+    padding: 10px 22px;
+    text-align:center;
+    box-shadow: 0 4px 10px var(--shadow);
+    max-width: 92vw;
+  }
+  .caption strong{
+    font-family:'Kalam', cursive;
+    font-size: 1.1rem;
+    letter-spacing: .04em;
+  }
+  .caption p{
+    margin: 4px 0 0;
+    color: var(--ink-soft);
+    font-size: .95rem;
+  }
+</style>
+</head>
+<body>
+  <h1 class="visually-hidden">Weekly Reports</h1>
+
+  <div class="scene" id="scene">
+    <svg viewBox="0 0 1400 640" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <rect x="0" y="0" width="1400" height="640" fill="var(--paper)"/>
+
+      <!-- clouds -->
+      <g class="sketch-light">
+        <path d="M90,60 a20,20 0 1,1 40,-2 a16,16 0 1,1 30,4 a14,14 0 1,1 -6,26 h-60 a16,16 0 1,1 -4,-28 Z"/>
+        <path d="M980,40 a18,18 0 1,1 36,-2 a15,15 0 1,1 27,4 a13,13 0 1,1 -5,24 h-54 a14,14 0 1,1 -4,-26 Z"/>
+        <path d="M1230,90 a16,16 0 1,1 32,-2 a13,13 0 1,1 24,4 a12,12 0 1,1 -4,22 h-48 a13,13 0 1,1 -4,-24 Z"/>
+        <path d="M480,30 a14,14 0 1,1 28,-2 a11,11 0 1,1 20,4 a10,10 0 1,1 -4,18 h-40 a11,11 0 1,1 -4,-20 Z"/>
+      </g>
+
+      <!-- city skyline -->
+      <g class="sketch-light">
+        <rect class="roof-fill" x="40" y="380" width="90" height="130"/>
+        <path d="M40,380 L85,340 L130,380"/>
+        <rect class="roof-fill" x="150" y="410" width="120" height="100"/>
+        <line x1="180" y1="410" x2="180" y2="340"/>
+        <line x1="240" y1="410" x2="240" y2="360"/>
+        <rect class="roof-fill" x="300" y="360" width="70" height="150"/>
+        <path d="M300,360 L335,325 L370,360"/>
+        <rect class="roof-fill" x="1000" y="390" width="100" height="120"/>
+        <path d="M1000,390 L1050,350 L1100,390"/>
+        <rect class="roof-fill" x="1120" y="415" width="130" height="95"/>
+        <circle cx="1150" cy="380" r="14"/>
+        <line x1="1150" y1="366" x2="1150" y2="345"/>
+        <line x1="1136" y1="352" x2="1164" y2="352"/>
+        <rect class="roof-fill" x="1270" y="370" width="90" height="140"/>
+        <line x1="1300" y1="370" x2="1300" y2="330"/>
+        <line x1="1340" y1="370" x2="1340" y2="345"/>
+        <!-- crane -->
+        <line x1="900" y1="510" x2="900" y2="330"/>
+        <line x1="900" y1="335" x2="990" y2="335"/>
+        <line x1="900" y1="335" x2="860" y2="360"/>
+        <line x1="960" y1="335" x2="960" y2="365"/>
+      </g>
+
+      <!-- rooftop terrace ground -->
+      <rect class="ground-fill" x="0" y="510" width="1400" height="130"/>
+      <path class="sketch-light" d="M0,510 H1400"/>
+      <g class="sketch-light">
+        <line x1="0" y1="545" x2="1400" y2="545"/>
+        <line x1="0" y1="580" x2="1400" y2="580"/>
+        <line x1="0" y1="615" x2="1400" y2="615"/>
+      </g>
+
+      <!-- title banner -->
+      <g>
+        <path class="banner" d="M470,26 h460 l-18,20 l18,20 h-460 l18,-20 Z"/>
+        <text class="banner-text" x="700" y="53" font-size="28">WEEKLY REPORTS</text>
+      </g>
+
+      <!-- clothesline anchor poles -->
+      <g class="sketch">
+        <line x1="18" y1="70" x2="18" y2="120"/>
+        <line x1="1382" y1="70" x2="1382" y2="120"/>
+      </g>
+      <path id="clothesline" class="sketch" fill="none" d=""/>
+    </svg>
+
+    <div class="cards-layer" id="cardsLayer"></div>
+  </div>
+
+  <div class="caption">
+    <strong>TEAM REPORTS</strong>
+    <p>Click a report on the line to open it.</p>
+  </div>
+
+<script>
+  // Weekly reports are overwritten in place under reports/ with the SAME
+  // filenames each week, so this list only needs editing if a report is
+  // renamed, added, or removed.
+  const REPORTS = [
+    { lines: ["GP Sales", "by Customer"],              file: "GP  sales by customer.pdf",              color: "#FFE9A8" },
+    { lines: ["Inventory by", "Brand &", "Collection"], file: "INVENTORY BY BRAND AND COLLECTION.pdf",  color: "#AEE3FF" },
+    { lines: ["Sales by", "Collection"],                file: "SALES BY COLLECTION.pdf",                color: "#FFC2D9" },
+    { lines: ["GP Sales", "by Brand"],                  file: "gp  Sales by brand.pdf",                 color: "#C6F6D5" },
+    { lines: ["Monthly Sales", "YTD vs 2025"],          file: "monthly sales ytd vs 2025.pdf",          color: "#E0D1FF" },
+    { lines: ["Open Sales by", "Brand &", "Customer"],  file: "open sales by brand and customer.pdf",   color: "#FFD3AE" },
+    { lines: ["YTD Sales", "by Brand"],                 file: "ytd sales by brand.pdf",                 color: "#C7FFF0" },
+    { lines: ["YTD Sales", "by Customer"],              file: "ytd sales by customer.pdf",              color: "#D8DFFF" },
+  ];
+
+  const PDF_ICON = `<svg class="pdf-icon" viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 2 H26 L36 12 V46 H4 Z" fill="#fff" stroke="#2e2a24" stroke-width="2"/>
+    <path d="M26 2 V12 H36 Z" fill="#e6e0d2" stroke="#2e2a24" stroke-width="2"/>
+    <rect x="9" y="24" width="22" height="7" rx="1.5" fill="#c73b2c"/>
+    <text x="20" y="29.5" text-anchor="middle" font-family="Patrick Hand, cursive" font-size="7" fill="#fff">PDF</text>
+    <line x1="9" y1="37" x2="27" y2="37" stroke="#2e2a24" stroke-width="1.4"/>
+    <line x1="9" y1="41" x2="23" y2="41" stroke="#2e2a24" stroke-width="1.4"/>
+  </svg>`;
+
+  const SCENE_W = 1400, SCENE_H = 640;
+  const LINE_Y0 = 110, SAG = 46;
+  const CARD_W = 148, CARD_H = 172, MARGIN = 30, GAP = 20;
+  const TILTS = [-2, 1.5, -1, 2.2, -1.6, 1.8, -2.4, 1.2];
+
+  function lineYAt(xFrac){
+    return LINE_Y0 + SAG * 4 * xFrac * (1 - xFrac);
+  }
+
+  const layer = document.getElementById("cardsLayer");
+  const linePath = document.getElementById("clothesline");
+  let d = `M18,${LINE_Y0.toFixed(1)} `;
+  const steps = 40;
+  for(let s = 1; s <= steps; s++){
+    const x = 18 + (1382 - 18) * (s / steps);
+    const xFrac = x / SCENE_W;
+    d += `L${x.toFixed(1)},${lineYAt(xFrac).toFixed(1)} `;
+  }
+  linePath.setAttribute("d", d);
+
+  REPORTS.forEach((r, i) => {
+    const cx = MARGIN + CARD_W / 2 + i * (CARD_W + GAP);
+    const xFrac = cx / SCENE_W;
+    const attachY = lineYAt(xFrac);
+    const title = r.lines.join(" ");
+
+    const a = document.createElement("a");
+    a.className = "card";
+    a.href = "reports/" + encodeURIComponent(r.file);
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.title = title;
+    a.setAttribute("aria-label", "Open report: " + title);
+    a.style.setProperty("--tilt", TILTS[i] + "deg");
+    a.style.setProperty("--card-color", r.color);
+    a.style.left = ((cx - CARD_W / 2) / SCENE_W * 100) + "%";
+    a.style.top = (attachY / SCENE_H * 100) + "%";
+    a.style.width = (CARD_W / SCENE_W * 100) + "%";
+    const textHtml = r.lines.map(l => `<span>${l}</span>`).join("");
+    a.innerHTML = `<span class="pin"></span>${PDF_ICON}<span class="label">${textHtml}</span>`;
+    layer.appendChild(a);
+  });
+</script>
+</body>
+</html>
