@@ -297,28 +297,28 @@
   // REPORTS:START
   const PERIODS = [
     { label: "10.2.26", reports: [
-      { title: "Inventory by Brand & Collection", file: "INVENTORY BY BRAND AND COLLECTION.pdf", color: "#FFE9A8" },
-      { title: "Monthly Sales YTD vs 2025", file: "monthly sales ytd vs 2025.pdf", color: "#AEE3FF" },
-      { title: "Open Sales by Brand & Customer", file: "open sales by brand and customer.pdf", color: "#FFC2D9" },
-      { title: "Sales by Collection", file: "SALES BY COLLECTION.pdf", color: "#C6F6D5" },
-      { title: "YTD Sales by Brand", file: "ytd sales by brand.pdf", color: "#E0D1FF" },
-      { title: "YTD Sales by Customer", file: "ytd sales by customer.pdf", color: "#FFD3AE" },
+      { title: "Inventory by Brand & Collection", file: "INVENTORY BY BRAND AND COLLECTION.pdf", color: "#FFE9A8", v: "daf2d8f4" },
+      { title: "Monthly Sales YTD vs 2025", file: "monthly sales ytd vs 2025.pdf", color: "#AEE3FF", v: "f7df3465" },
+      { title: "Open Sales by Brand & Customer", file: "open sales by brand and customer.pdf", color: "#FFC2D9", v: "6aad9014" },
+      { title: "Sales by Collection", file: "SALES BY COLLECTION.pdf", color: "#C6F6D5", v: "04e3d48f" },
+      { title: "YTD Sales by Brand", file: "ytd sales by brand.pdf", color: "#E0D1FF", v: "c421af2f" },
+      { title: "YTD Sales by Customer", file: "ytd sales by customer.pdf", color: "#FFD3AE", v: "fde4e62d" },
     ] },
     { label: "9.25.26", reports: [
-      { title: "Inventory by Brand & Collection", file: "INVENTORY BY BRAND AND COLLECTION.pdf", color: "#FFE9A8" },
-      { title: "Monthly Sales YTD vs 2025", file: "monthly sales ytd vs 2025.pdf", color: "#AEE3FF" },
-      { title: "Open Sales by Brand & Customer", file: "open sales by brand and customer.pdf", color: "#FFC2D9" },
-      { title: "Sales by Collection", file: "SALES BY COLLECTION.pdf", color: "#C6F6D5" },
-      { title: "YTD Sales by Brand", file: "ytd sales by brand.pdf", color: "#E0D1FF" },
-      { title: "YTD Sales by Customer", file: "ytd sales by customer.pdf", color: "#FFD3AE" },
+      { title: "Inventory by Brand & Collection", file: "INVENTORY BY BRAND AND COLLECTION.pdf", color: "#FFE9A8", v: "7d859b5d" },
+      { title: "Monthly Sales YTD vs 2025", file: "monthly sales ytd vs 2025.pdf", color: "#AEE3FF", v: "6ab02041" },
+      { title: "Open Sales by Brand & Customer", file: "open sales by brand and customer.pdf", color: "#FFC2D9", v: "1ee3b77c" },
+      { title: "Sales by Collection", file: "SALES BY COLLECTION.pdf", color: "#C6F6D5", v: "f94a0a4a" },
+      { title: "YTD Sales by Brand", file: "ytd sales by brand.pdf", color: "#E0D1FF", v: "a9e75286" },
+      { title: "YTD Sales by Customer", file: "ytd sales by customer.pdf", color: "#FFD3AE", v: "45688f17" },
     ] },
     { label: "9.18.26", reports: [
-      { title: "Inventory by Brand & Collection", file: "INVENTORY BY BRAND AND COLLECTION.pdf", color: "#FFE9A8" },
-      { title: "Monthly Sales YTD vs 2025", file: "monthly sales ytd vs 2025.pdf", color: "#AEE3FF" },
-      { title: "Open Sales by Brand & Customer", file: "open sales by brand and customer.pdf", color: "#FFC2D9" },
-      { title: "Sales by Collection", file: "SALES BY COLLECTION.pdf", color: "#C6F6D5" },
-      { title: "YTD Sales by Brand", file: "ytd sales by brand.pdf", color: "#E0D1FF" },
-      { title: "YTD Sales by Customer", file: "ytd sales by customer.pdf", color: "#FFD3AE" },
+      { title: "Inventory by Brand & Collection", file: "INVENTORY BY BRAND AND COLLECTION.pdf", color: "#FFE9A8", v: "1404c3e3" },
+      { title: "Monthly Sales YTD vs 2025", file: "monthly sales ytd vs 2025.pdf", color: "#AEE3FF", v: "e0066e8c" },
+      { title: "Open Sales by Brand & Customer", file: "open sales by brand and customer.pdf", color: "#FFC2D9", v: "1c95519c" },
+      { title: "Sales by Collection", file: "SALES BY COLLECTION.pdf", color: "#C6F6D5", v: "fb11f008" },
+      { title: "YTD Sales by Brand", file: "ytd sales by brand.pdf", color: "#E0D1FF", v: "b05d4f70" },
+      { title: "YTD Sales by Customer", file: "ytd sales by customer.pdf", color: "#FFD3AE", v: "393ba28e" },
     ] },
   ];
   // REPORTS:END
@@ -394,7 +394,7 @@
 
     const a = document.createElement("a");
     a.className = "card";
-    a.href = "reports/" + encodeURIComponent(label) + "/" + encodeURIComponent(r.file);
+    a.href = "reports/" + encodeURIComponent(label) + "/" + encodeURIComponent(r.file) + "?v=" + r.v;
     a.target = "_blank";
     a.rel = "noopener";
     a.title = r.title;
