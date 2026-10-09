@@ -192,79 +192,45 @@
     font-size: 1.15rem;
   }
 
-  .today-gallery{
-    width: min(100%, 1320px);
-    margin: clamp(28px, 5vw, 56px) auto 0;
+  .scene-art-layer{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
   }
-  .gallery-heading{
+  .scene-art{
+    position:absolute;
+    top:73%;
+    width:8.8%;
+    height:26%;
     display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    gap:12px;
-    padding: 0 4px 10px;
-    border-bottom: 1.5px dashed rgba(75,70,61,.55);
+    align-items:center;
+    justify-content:center;
+    pointer-events:auto;
+    transform:translateX(-50%) rotate(var(--art-tilt, 0deg));
+    transition:transform .2s ease, filter .2s ease;
   }
-  .gallery-heading h2{
-    margin:0;
-    font-family:'Kalam', cursive;
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  .scene-art.top-art{
+    top:11%;
+    width:8%;
+    height:7%;
   }
-  .gallery-heading p{
-    margin:0;
-    color:var(--ink-soft);
-    font-size:1.05rem;
+  .scene-art:hover,
+  .scene-art:focus-visible{
+    z-index:1;
+    transform:translateX(-50%) translateY(-5%) rotate(0deg) scale(1.08);
+    filter:drop-shadow(0 5px 5px var(--shadow));
   }
-  .gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-    gap:18px;
-    padding:20px 4px 4px;
-  }
-  .image-card{
-    margin:0;
-    padding:9px 9px 12px;
-    background:#fffdf7;
-    border:1.5px solid rgba(46,42,36,.45);
-    border-radius:8px 12px 9px 11px / 11px 8px 12px 9px;
-    box-shadow:0 5px 10px var(--shadow);
-    transform:rotate(var(--image-tilt, 0deg));
-    transition:transform .18s ease, box-shadow .18s ease;
-  }
-  .image-card:hover,
-  .image-card:focus-within{
-    transform:translateY(-5px) rotate(0deg);
-    box-shadow:0 11px 18px var(--shadow);
-  }
-  .image-card a{
-    display:block;
-    border-radius:4px;
-  }
-  .image-card a:focus-visible{
+  .scene-art:focus-visible{
     outline:2.5px dashed var(--ink);
-    outline-offset:4px;
+    outline-offset:2px;
   }
-  .image-card img{
+  .scene-art img{
     display:block;
     width:100%;
-    height:190px;
+    height:100%;
     object-fit:contain;
-    background:#f6f1e6;
-    border-radius:4px;
-  }
-  .image-card figcaption{
-    padding:9px 3px 0;
-    text-align:center;
-    font-size:1.1rem;
-    font-weight:700;
-    line-height:1.25;
-  }
-  @media (max-width: 520px){
-    .gallery-heading{
-      align-items:flex-start;
-      flex-direction:column;
-      gap:2px;
-    }
-    .gallery-grid{ gap:14px; }
+    filter:drop-shadow(0 3px 3px rgba(46,42,36,.22));
   }
 </style>
 </head>
@@ -321,28 +287,6 @@
         <line x1="0" y1="615" x2="1400" y2="615"/>
       </g>
 
-      <!-- potted plants -->
-      <g class="sketch">
-        <g>
-          <path fill="#b5602f" d="M60,600 L128,600 L118,638 L70,638 Z"/>
-          <path fill="#8fbf7a" d="M94,600 C74,568 58,550 48,522 C74,532 94,552 100,576 Z"/>
-          <path fill="#8fbf7a" d="M94,600 C106,562 124,540 148,520 C130,542 118,566 108,588 Z"/>
-          <path fill="#8fbf7a" d="M94,600 C90,564 94,538 97,512 C106,538 104,568 102,592 Z"/>
-        </g>
-        <g>
-          <path fill="#b5602f" d="M666,608 L724,608 L715,640 L675,640 Z"/>
-          <path fill="#8fbf7a" d="M695,608 C678,580 664,565 655,542 C678,551 695,568 700,589 Z"/>
-          <path fill="#8fbf7a" d="M695,608 C706,576 722,558 743,540 C727,559 716,580 707,599 Z"/>
-          <path fill="#8fbf7a" d="M695,608 C691,578 695,556 698,534 C706,556 704,582 702,602 Z"/>
-        </g>
-        <g>
-          <path fill="#b5602f" d="M1272,600 L1340,600 L1330,638 L1282,638 Z"/>
-          <path fill="#8fbf7a" d="M1306,600 C1286,568 1270,550 1260,522 C1286,532 1306,552 1312,576 Z"/>
-          <path fill="#8fbf7a" d="M1306,600 C1318,562 1336,540 1360,520 C1342,542 1330,566 1320,588 Z"/>
-          <path fill="#8fbf7a" d="M1306,600 C1302,564 1306,538 1309,512 C1318,538 1316,568 1314,592 Z"/>
-        </g>
-      </g>
-
       <!-- title banner -->
       <g>
         <path class="banner" d="M470,26 h460 l-18,20 l18,20 h-460 l18,-20 Z"/>
@@ -357,6 +301,56 @@
       <path id="clothesline" class="sketch" fill="none" d=""/>
     </svg>
 
+    <div class="scene-art-layer" aria-label="Today's artwork">
+      <a class="scene-art top-art" style="left:29%; --art-tilt:-2deg" href="./images/AlienCreature-Unknown-H-S-Pink600%402x.png" target="_blank" rel="noopener">
+        <img src="./images/AlienCreature-Unknown-H-S-Pink600%402x.png" alt="Pink alien creature illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art top-art" style="left:37.4%; --art-tilt:2deg" href="./images/3dicons-vamp-dynamic-color.png" target="_blank" rel="noopener">
+        <img src="./images/3dicons-vamp-dynamic-color.png" alt="Colorful vampire illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art top-art" style="left:45.8%; --art-tilt:-1deg" href="./images/3dicons-bat-dynamic-color.png" target="_blank" rel="noopener">
+        <img src="./images/3dicons-bat-dynamic-color.png" alt="Colorful bat illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art top-art" style="left:54.2%; --art-tilt:2deg" href="./images/3dicons-ghost-dynamic-color.png" target="_blank" rel="noopener">
+        <img src="./images/3dicons-ghost-dynamic-color.png" alt="Colorful ghost illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art top-art" style="left:62.6%; --art-tilt:-1deg" href="./images/3dicons-zombie-dynamic-color.png" target="_blank" rel="noopener">
+        <img src="./images/3dicons-zombie-dynamic-color.png" alt="Colorful zombie illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art top-art" style="left:71%; --art-tilt:2deg" href="./images/3dicons-spider-dynamic-color.png" target="_blank" rel="noopener">
+        <img src="./images/3dicons-spider-dynamic-color.png" alt="Colorful spider illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:5%; --art-tilt:-3deg" href="./images/PalmLeft-Organic-V-M-Lime600%402x.png" target="_blank" rel="noopener">
+        <img src="./images/PalmLeft-Organic-V-M-Lime600%402x.png" alt="Organic lime-green palm leaf illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:15%; --art-tilt:2deg" href="./images/Pumpkin%20head%202.png" target="_blank" rel="noopener">
+        <img src="./images/Pumpkin%20head%202.png" alt="Pumpkin-headed Halloween character" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:25%; --art-tilt:-2deg" href="./images/Skull%20axe.png" target="_blank" rel="noopener">
+        <img src="./images/Skull%20axe.png" alt="Skull and axe Halloween illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:35%; --art-tilt:1deg" href="./images/Skull-2.png" target="_blank" rel="noopener">
+        <img src="./images/Skull-2.png" alt="Skull illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:45%; --art-tilt:-1deg" href="./images/Red%20rose.png" target="_blank" rel="noopener">
+        <img src="./images/Red%20rose.png" alt="Red rose illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:55%; --art-tilt:2deg" href="./images/The%20Black%20Reaper.png" target="_blank" rel="noopener">
+        <img src="./images/The%20Black%20Reaper.png" alt="Black Reaper illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:65%; --art-tilt:-2deg" href="./images/Mushrooms%201.png" target="_blank" rel="noopener">
+        <img src="./images/Mushrooms%201.png" alt="Mushroom illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:75%; --art-tilt:2deg" href="./images/Spooky%20Tree%202.png" target="_blank" rel="noopener">
+        <img src="./images/Spooky%20Tree%202.png" alt="Spooky tree illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:85%; --art-tilt:-2deg" href="./images/Spooky%20Tree%203.png" target="_blank" rel="noopener">
+        <img src="./images/Spooky%20Tree%203.png" alt="Alternate spooky tree illustration" loading="lazy" decoding="async">
+      </a>
+      <a class="scene-art" style="left:95%; --art-tilt:3deg" href="./images/Zombie%20hand%20dirt.png" target="_blank" rel="noopener">
+        <img src="./images/Zombie%20hand%20dirt.png" alt="Zombie hand emerging from dirt" loading="lazy" decoding="async">
+      </a>
+    </div>
     <div class="cards-layer" id="cardsLayer"></div>
   </div>
   </div>
@@ -366,56 +360,19 @@
     <p><span id="periodNote"></span>Click a report on the line to open it.</p>
   </div>
 
-  <section class="today-gallery" aria-labelledby="today-gallery-title">
-    <div class="gallery-heading">
-      <h2 id="today-gallery-title">Fresh from today</h2>
-      <p>PNG artwork saved October 9, 2026 · 6 images</p>
-    </div>
-    <div class="gallery-grid">
-      <figure class="image-card" style="--image-tilt: -1deg">
-        <a href="./PalmLeft-Organic-V-M-Lime600%402x.png" target="_blank" rel="noopener">
-          <img src="./PalmLeft-Organic-V-M-Lime600%402x.png" alt="Organic lime-green palm leaf illustration" loading="lazy" decoding="async">
-        </a>
-        <figcaption>Palm Leaf</figcaption>
-      </figure>
-      <figure class="image-card" style="--image-tilt: 1deg">
-        <a href="./Pumpkin%20head%202.png" target="_blank" rel="noopener">
-          <img src="./Pumpkin%20head%202.png" alt="Pumpkin-headed Halloween character" loading="lazy" decoding="async">
-        </a>
-        <figcaption>Pumpkin Head</figcaption>
-      </figure>
-      <figure class="image-card" style="--image-tilt: -0.5deg">
-        <a href="./Skull%20axe.png" target="_blank" rel="noopener">
-          <img src="./Skull%20axe.png" alt="Skull and axe Halloween illustration" loading="lazy" decoding="async">
-        </a>
-        <figcaption>Skull Axe</figcaption>
-      </figure>
-      <figure class="image-card" style="--image-tilt: 1.2deg">
-        <a href="./Spooky%20Tree%202.png" target="_blank" rel="noopener">
-          <img src="./Spooky%20Tree%202.png" alt="Spooky tree illustration" loading="lazy" decoding="async">
-        </a>
-        <figcaption>Spooky Tree</figcaption>
-      </figure>
-      <figure class="image-card" style="--image-tilt: -1.2deg">
-        <a href="./Spooky%20Tree%203.png" target="_blank" rel="noopener">
-          <img src="./Spooky%20Tree%203.png" alt="Alternate spooky tree illustration" loading="lazy" decoding="async">
-        </a>
-        <figcaption>Spooky Tree · Alt</figcaption>
-      </figure>
-      <figure class="image-card" style="--image-tilt: 0.6deg">
-        <a href="./Zombie%20hand%20dirt.png" target="_blank" rel="noopener">
-          <img src="./Zombie%20hand%20dirt.png" alt="Zombie hand emerging from dirt" loading="lazy" decoding="async">
-        </a>
-        <figcaption>Zombie Hand</figcaption>
-      </figure>
-    </div>
-  </section>
-
 <script>
   // AUTO-GENERATED by update_site.py from the dated folders in reports/ --
   // do not hand-edit this block, run `python update_site.py` instead.
   // REPORTS:START
   const PERIODS = [
+    { label: "10.9.26", reports: [
+      { title: "Inventory by Brand & Collection", file: "INVENTORY BY BRAND AND COLLECTION.pdf", color: "#FFE9A8", v: "10f5730c" },
+      { title: "Monthly Sales YTD vs 2025", file: "monthly sales ytd vs 2025.pdf", color: "#AEE3FF", v: "a7e07a1d" },
+      { title: "Open Sales by Brand & Customer", file: "open sales by brand and customer.pdf", color: "#FFC2D9", v: "46b7ef79" },
+      { title: "Sales by Collection", file: "SALES BY COLLECTION.pdf", color: "#C6F6D5", v: "8d6e129d" },
+      { title: "YTD Sales by Brand", file: "ytd sales by brand.pdf", color: "#E0D1FF", v: "42e1fc84" },
+      { title: "YTD Sales by Customer", file: "ytd sales by customer.pdf", color: "#FFD3AE", v: "47cd95ab" },
+    ] },
     { label: "10.2.26", reports: [
       { title: "Inventory by Brand & Collection", file: "INVENTORY BY BRAND AND COLLECTION.pdf", color: "#FFE9A8", v: "daf2d8f4" },
       { title: "Monthly Sales YTD vs 2025", file: "monthly sales ytd vs 2025.pdf", color: "#AEE3FF", v: "f7df3465" },
