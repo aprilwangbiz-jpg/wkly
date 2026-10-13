@@ -20,7 +20,7 @@ pdf/
 Keep the PNG files in `images/` alongside `index.html`; the page uses paths such
 as `images/filename.png` to display and link to them. Adding an image to the
 folder alone does not add it to the page: add a corresponding image link in the
-scene markup in `index.html`. When it updates `index.html`, the report updater
+scene markup in `index.html`, then push the image too (see Hosting). When it updates `index.html`, the report updater
 rewrites only the generated `PERIODS` data block, preserving the artwork markup.
 
 ## Updating the reports each week
@@ -77,12 +77,25 @@ note. Deliberate choices, so future edits don't drift from the intent:
 
 ## Hosting
 
-Published via GitHub Pages from a dedicated repo (`weekly-reports`, separate
-from the `yafainventory.com` dashboard). The repo is public — free GitHub
+Published via GitHub Pages from a dedicated repo (`wkly`, separate from the
+`yafainventory.com` dashboard) at https://aprilwangbiz-jpg.github.io/wkly/. The repo is public — free GitHub
 Pages requires it, the same tradeoff already made for `yafainventory.com`.
 
 `background/`, `instruction.txt`, `style.txt`, `images/gallary.png`, and
 `ceo only/` are excluded via `.gitignore` — the first four are local
 reference/design material, and `ceo only/` holds reports that must not be
-public. Other PNGs in `images/` are part of the page and should be published
-with it.
+public. Other PNGs in `images/` are part of the page and must be published
+with it — if they're missing from the repo, the live page shows only the
+image names instead of the pictures.
+
+`publish.ps1` only stages `reports/` and `index.html`. After adding new
+artwork, push it yourself:
+
+```
+git add images/
+git commit -m "chore: add site images"
+git push
+```
+
+`ceo only - Copy/` is a local backup of the restricted reports — never add it
+to the repo.
