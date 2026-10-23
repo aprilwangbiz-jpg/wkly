@@ -31,6 +31,7 @@ from reportlab.pdfgen import canvas
 ROOT = Path(__file__).parent
 REPORTS_DIR = ROOT / "reports"
 INDEX_HTML = ROOT / "index.html"
+CEO_ONLY_DIR = ROOT / "ceo only"
 
 # Cycles if there are more reports than colors.
 PALETTE = [
@@ -187,6 +188,20 @@ def main() -> None:
         )
     INDEX_HTML.write_text(updated_html, encoding="utf-8")
     print(f"\nindex.html updated with {len(periods)} period(s).")
+
+    stamp_ceo_only(periods[0][0])
+
+
+def stamp_ceo_only(period: str) -> None:
+    """Stamp the private ceo only/ PDFs (never published) with the newest week."""
+    print(f"\n{CEO_ONLY_DIR.name} (week {period})")
+    for path in sorted(CEO_ONLY_DIR.glob("*.pdf"), key=lambda p: p.name.lower()):
+        try:
+            prepare_pdf(path, make_title(path.name), period)
+            print(f"  {path.name} stamped")
+        except SystemExit as e:
+            # A stale file from an earlier week shouldn't block publishing.
+            print(f"  WARNING: skipped -- {e}")
 
 
 if __name__ == "__main__":
